@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Notes;assembly=Notes"
+             x:Class="Notes.NotesPage"
+             Title="Notes">
+    <ContentPage.Resources>
+        <local:StringToColorConverter x:Key="cnvInvert"></local:StringToColorConverter>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="OnNoteAddedClicked" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <SearchBar Placeholder="Search Note" TextChanged="SearchBar_TextChanged" Opacity="1"/>
+        <ListView x:Name="listView"
+                  Margin="20"
+                  ItemSelected="OnListViewItemSelected"
+                  HasUnevenRows="True"
+                  RowHeight="-1"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell x:Name="title" Text="{Binding Text}" TextColor="{Binding Check,Converter={StaticResource cnvInvert}}"  
+                              Detail="{Binding Date}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
